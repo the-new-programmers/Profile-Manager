@@ -1,6 +1,7 @@
 const express = require('express');
 const expresshandlebars = require('express-handlebars');
 const path = require('path');
+const colors = require('colors');
 
 const { database_keys } = require('../database/database_keys');
 
@@ -34,5 +35,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /* Starting the server */
 app.listen(app.get('port'), () => {
-    console.log('Server on port: ' + app.get('port'));
+    console.log(colors.rainbow('Server on port: ' + app.get('port')));
+    console.log(colors.america('¡Welcome devs! Visit localhost:4000 to deploy'));
 });
