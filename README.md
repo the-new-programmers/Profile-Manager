@@ -27,7 +27,14 @@ From the same console type:
 ```npm
 npm run dev
 ```
-After go to you Navigator and type in your URL:
+After go to your Navigator and type in your URL:
 ```
 localhost:4000
 ```
+### Authors
+
+* 1.Alek: https://github.com/Alek07
+
+* 2.Luis: https://github.com/jose507
+
+* 3.Juan: https://github.com/Extibax
