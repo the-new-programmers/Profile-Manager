@@ -3,7 +3,8 @@ const expresshandlebars = require('express-handlebars');
 const path = require('path');
 const colors = require('colors');
 
-const { database_keys } = require('../database/database_keys');
+const pool = require('./database/database_connection');
+const { database_keys } = require('./database/database_keys');
 
 /* Initializations */
 const app = express();
@@ -35,6 +36,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /* Starting the server */
 app.listen(app.get('port'), () => {
-    console.log(colors.rainbow('Server on port: ' + app.get('port')));
-    console.log(colors.america('¡Welcome devs! Visit localhost:4000 to deploy'));
+    console.log(colors.yellow('Server on port: ' + app.get('port')));
+    console.log(colors.yellow('¡Welcome devs! Visit localhost:4000 to deploy'));
 });
