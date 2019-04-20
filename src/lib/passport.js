@@ -2,7 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const database = require('../database/database_connection');
-const helper_functions = require('../lib/helper_functions');
+const { encryptPassword } = require('../lib/helper_pass');
 
 passport.use('local.signup', new LocalStrategy({
     usernameField: 'username',
@@ -17,7 +17,7 @@ passport.use('local.signup', new LocalStrategy({
         first_name: firstname,
         last_name: lastname
     }
-    newUser.password = await helper_functions.encryptPassword(password);
+    newUser.password = await encryptPassword(password);
     const result = await database.query("INSERT INTO users SET ?", [newUser]);
     newUser.id = result.insertId;
     console.log(result);

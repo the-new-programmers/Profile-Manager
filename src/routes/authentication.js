@@ -1,17 +1,18 @@
 const express = require('express');
 const expressRouter = express.Router();
+const { isLoggedIn, isNotLoggedIn } = require('../lib/helper_auth');
 
 const passport = require('passport');
 
-expressRouter.get('/', (req, res) => {
-    res.render('test/index');
+expressRouter.get('/', isLoggedIn, (req, res) => {
+    res.render('index');
 });
 
-expressRouter.get('/signup', (req, res) => {
-    res.render('test/signup');
+expressRouter.get('/signup', isNotLoggedIn, (req, res) => {
+    res.render('auth/signup');
 });
 
-expressRouter.post('/signup', passport.authenticate('local.signup', {
+expressRouter.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
     successRedirect: '/signup',
     failureRedirect: '/'
 }));
