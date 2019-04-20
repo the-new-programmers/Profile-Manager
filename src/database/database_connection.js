@@ -4,16 +4,24 @@ const { promisify } = require('util');
 
 const { keys } = require('./database_keys');
 
-const pool = mysql.createPool(keys);
+const database = mysql.createPool(keys);
 
-pool.getConnection((errors, connection) => {
+database.getConnection((errors, connection) => {
     if (connection) {
         connection.release();
         console.log(colors.yellow('DB is Connected Successfully'));
+    } else {
+        console.log(colors.red("DB Connection is Wrong" + errors));
     }
 });
 
-/* Promisify Pool Queries */
-pool.query = promisify(pool.query);
+let result;
 
-module.exports = pool;
+result = database.query("SELECT * FROM users"), (result) => {
+    console.log("Hola ", result);
+};
+
+/* Promisify Pool Queries */
+database.query = promisify(database.query);
+
+module.exports = database;
